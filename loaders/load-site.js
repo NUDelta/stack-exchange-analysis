@@ -6,19 +6,19 @@ var cluster = require('cluster');
 var config = require('../util/config');
 
 var BadgeModel = require("../models/BadgeModel"),
-    PostLinkModel = require("../models/PostLinkModel"),
-    PostModel = require("../models/PostModel"),
-    TagModel = require("../models/TagModel"),
-    UnderdogModel = require("../models/UnderdogModel"),
-    UserModel = require("../models/UserModel"),
-    VoteModel = require("../models/VoteModel")
+  PostLinkModel = require("../models/PostLinkModel"),
+  PostModel = require("../models/PostModel"),
+  TagModel = require("../models/TagModel"),
+  UnderdogModel = require("../models/UnderdogModel"),
+  UserModel = require("../models/UserModel"),
+  VoteModel = require("../models/VoteModel");
 var models = [
   BadgeModel,
   PostLinkModel,
   PostModel,
   TagModel,
   UserModel,
-  VoteModel,
+  VoteModel
 ];
 
 var loadCollection = function (dir, Model) {
@@ -50,7 +50,7 @@ var loadCollection = function (dir, Model) {
           var idIndex = acceptedIds.indexOf(rowObj.id);
           if (idIndex > -1) {
             rowObj.accepted = true;
-            acceptedIds.splice(idIndex, 1)
+            acceptedIds.splice(idIndex, 1);
           }
         }
       }
