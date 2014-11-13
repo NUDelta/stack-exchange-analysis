@@ -4,7 +4,7 @@ var voteSchema = mongoose.Schema({
   "id": {type: Number, index: true},
   "postid": {type: Number, index: true},
   "votetypeid": Number,
-  "creationdate": Date,
+  "creationdate": Date
 });
 voteSchema.set('autoIndex', false);
 voteSchema.virtual('xml')
