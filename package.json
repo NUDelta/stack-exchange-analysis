@@ -1,0 +1,15 @@
+{
+  "name": "ng-todo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "mongodb": "^1.4.19",
+    "mongoose": "^3.8.17",
+    "plotly": "^0.2.13",
+    "sax": "^0.6.1",
+    "underscore": "^1.7.0"
+  }
+}

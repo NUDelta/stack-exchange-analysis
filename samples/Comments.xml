@@ -1,0 +1,64 @@
+<comments>
+    <row Id="968" PostId="52141" Score="1" Text="mscorlib doesn't as far as I know..."
+         CreationDate="2008-09-09T15:23:47.817" UserId="4002"/>
+    <row Id="971" PostId="52080" Score="0"
+         Text="These questions were encouraged, on the podcasts, because it will help the site overall, because people looking for this on the net will find it and/or it will help with the Google stats."
+         CreationDate="2008-09-09T15:29:12.513" UserId="115"/>
+    <row Id="972" PostId="52141" Score="0"
+         Text="'mscorlib' contains mostly 'System.' namespaces though. But 'System' is not a reserved namespace element."
+         CreationDate="2008-09-09T15:32:37.483" UserId="3619"/>
+    <row Id="974" PostId="52141" Score="0" Text="Neither do the Microsoft.* assemblies."
+         CreationDate="2008-09-09T15:32:48.933" UserId="2547"/>
+    <row Id="975" PostId="52161" Score="0"
+         Text="I wonder if you can query some Microsoft service for the public key tokens... like the way they provide a remote symbol server. That way you don't have to track it manually."
+         CreationDate="2008-09-09T15:33:27.230" UserId="3619"/>
+    <row Id="976" PostId="52149" Score="0"
+         Text="it only parses if the given text matches the pattern and returns the Date object representation of that string. It doesn't parse if the date information is somewhere within the other texts. &#xA;like &quot;sometext 12/03/2004 sometext."
+         CreationDate="2008-09-09T15:33:46.560" UserId="3993"/>
+    <row Id="978" PostId="52080" Score="0"
+         Text="&quot;Edit: Whats with the down votes? This is a perfectly legit question.&quot; It's a bit trivial and as you answered it yourself it does makes it look like you were after the self learner badge. I doubt people would look for an answer to this here, they'd look at a JavaScript syntax reference."
+         CreationDate="2008-09-09T15:35:48.647" UserId="2541"/>
+    <row Id="979" PostId="49837" Score="0"
+         Text="&quot;No Checked Exceptions&quot; is definitely not an improvement. I want to know what things can go wrong, rather than have to guess a few cases and hope that's all."
+         CreationDate="2008-09-09T15:37:07.283" UserId="3408"/>
+    <row Id="983" PostId="52185" Score="0" Text="Didn't I see a Java IDE that offered this? Within reason, of course."
+         CreationDate="2008-09-09T15:40:17.697" UserId="1000"/>
+    <row Id="985" PostId="52199" Score="0"
+         Text="The issue here is that a lot of stuff is in the GAC according to AssemblyName and Assembly"
+         CreationDate="2008-09-09T15:44:21.777" UserId="4002"/>
+    <row Id="988" PostId="52196" Score="0"
+         Text="If it fails to defrag any of the files PageDefrag will keep trying with each boot and can take a while, hence its option to run once.&#xA;&#xA;This doesn't mean it's not a great tool and I heartily recommend it.  +1 from me."
+         CreationDate="2008-09-09T15:49:08.457" UserId="3171"/>
+    <row Id="989" PostId="50326" Score="0"
+         Text="So the database appender is what was giving Jeff the locking issues that he discussed in the podcast.  Unfortunately we are using the database appender because we wanted a centralized log repository."
+         CreationDate="2008-09-09T16:01:18.007" UserId="1642688"/>
+    <row Id="991" PostId="52243" Score="0"
+         Text="Maybe I should clarify my question, I want to know what a dynamically typed Object is, so using TypeName will (in my case) only return &quot;Object&quot;."
+         CreationDate="2008-09-09T16:07:50.813" UserId="1111"/>
+    <row Id="992" PostId="51885" Score="0" Text="Wow... it is amazing most everyone does the same thing."
+         CreationDate="2008-09-09T16:08:45.507" UserId="2535"/>
+    <row Id="993" PostId="52253" Score="0"
+         Text="Very cool.  I didn't know you could do things like $$('#mytable tr').  That makes my life a lot easier."
+         CreationDate="2008-09-09T16:09:20.063" UserId="305"/>
+    <row Id="995" PostId="52152" Score="0"
+         Text="I read this article during a code revisit. I followed some of the advice but I am very restricted in what I can do to the DB. I only got our sql server updated to 2005 about 6 months ago."
+         CreationDate="2008-09-09T16:11:04.957" UserId="5197"/>
+    <row Id="996" PostId="52253" Score="1"
+         Text="@swilliams code is nicer than my example, but I think you should use addClassName() rather than explicitly setting style in the JS."
+         CreationDate="2008-09-09T16:11:58.310" UserId="72"/>
+    <row Id="998" PostId="52149" Score="0"
+         Text="That might be undecidable.  What if the text contains two dates, e.g. &quot;Between A and B, blah&quot; where A and B are dates..."
+         CreationDate="2008-09-09T16:12:59.523" UserId="4926"/>
+    <row Id="1000" PostId="52253" Score="0"
+         Text="@Mark Biek, there are a bunch of helper guys like that $F, and $A. See the utility page: http://www.prototypejs.org/api/utility and Enumerable objects are very powerful: http://www.prototypejs.org/api/enumerable"
+         CreationDate="2008-09-09T16:14:55.523" UserId="736"/>
+    <row Id="1002" PostId="52019" Score="0"
+         Text="I was going to comment exactly what you said when I noticed your comment at the bottom.  +1! :)"
+         CreationDate="2008-09-09T16:18:46.497" UserId="1324220"/>
+    <row Id="1004" PostId="52244" Score="2"
+         Text="an addition... if you have root access but not the oracle user, login as root then &quot;su - oracle&quot; and follow Paul's instructions. Also try all the default oracle passwords. Last option is to look at OUTLN and DBSNMP accounts and Oracle hacks around that."
+         CreationDate="2008-09-09T16:29:39.217" UserId="4134"/>
+    <row Id="1005" PostId="52080" Score="0"
+         Text="If the self-learner badge were working I would already have it but Jeff encouraged these types of questions in the podcasts."
+         CreationDate="2008-09-09T16:31:00.837" UserId="115"/>
+</comments>

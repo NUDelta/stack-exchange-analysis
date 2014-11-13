@@ -1,0 +1,9 @@
+/Users/josh/.nvm/v0.10.30/bin/node question-stats.js
+Number of questions and answers:                21674904
+Number of answers:                              13684117
+Number of questions:                             7990787
+Number of questions with at least one answer:    7069565
+Number of questions with accepted answer:        4596859
+Number of questions without accepted answer:     3393928
+Number of questions without any answers:          921222
+

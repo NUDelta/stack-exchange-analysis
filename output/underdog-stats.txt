@@ -1,0 +1,5 @@
+/Users/josh/.nvm/v0.10.30/bin/node underdog-stats.js
+Number of underdogs:                                 639269
+Total number of questions with accepted answers:    4596859
+Percentage of underdogs in answered questions:           13.906647995946797%
+Percentage of underdogs in all questions:                 8.000075587047933%
