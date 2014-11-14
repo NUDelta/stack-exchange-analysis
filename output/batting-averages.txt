@@ -1,0 +1,12 @@
+acceptedVotes: 4880
+upvotes: 27749
+downvotes: 153
+
+
+
+John Skeet:
+acceptedVotes: 17906
+questions answered:
+upvotes: 239763
+downvotes: 1514
+upvote percentage: 239763 / (239763 + 1514)

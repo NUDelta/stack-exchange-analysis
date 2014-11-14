@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
   "id": {type: Number, index: true},
-  "reputation": Number,
+  "reputation": {type: Number, index: true},
   "creationdate": Date,
   "displayname": String,
   "LastAccessDate": Date,
@@ -13,8 +13,8 @@ var userSchema = mongoose.Schema({
 });
 userSchema.set('autoIndex', false);
 userSchema.virtual('xml')
-    .get(function() {
-      return "Users.xml";
-    });
+  .get(function () {
+    return "Users.xml";
+  });
 
 module.exports = mongoose.model("User", userSchema);

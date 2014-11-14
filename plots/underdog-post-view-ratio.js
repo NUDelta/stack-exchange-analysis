@@ -64,7 +64,7 @@ var underdogStream = function (postCountMap) {
   });
   stream.on('end', function (post) {
     var endTime = new Date().getTime();
-    console.log(rowCount + "All done! | Elapsed time: " + (endTime - startTime) / 1000 + " seconds, Rowcount: " + rowCount + " records.")
+    console.log(rowCount + "All done! | Elapsed time: " + (endTime - startTime) / 1000 + " seconds, Rowcount: " + rowCount + " records.");
     console.log("Post distribution:");
     console.log(JSON.stringify(underdogCountMap, null, 2));
 
