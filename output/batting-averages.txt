@@ -10,3 +10,253 @@ questions answered:
 upvotes: 239763
 downvotes: 1514
 upvote percentage: 239763 / (239763 + 1514)
+
+
+
+
+
+
+/Users/josh/.nvm/v0.10.30/bin/node user-batting-averages.js
+Inteval is 17365
+User Jon Skeet 22656
+Reputation: 709269
+acceptedVotes: 17906
+upvotes: 239763
+downvotes: 1514
+
+User pestilence669 226917
+Reputation: 4044
+acceptedVotes: 39
+upvotes: 334
+downvotes: 11
+
+User Max Al Farakh 254160
+Reputation: 2057
+acceptedVotes: 26
+upvotes: 137
+downvotes: 7
+
+User Yohann 1158367
+Reputation: 1326
+acceptedVotes: 6
+upvotes: 108
+downvotes: 3
+
+User OptimizedQuery 2140903
+Reputation: 946
+acceptedVotes: 7
+upvotes: 50
+downvotes: 0
+
+User Nick 101839
+Reputation: 718
+acceptedVotes: 5
+upvotes: 44
+downvotes: 0
+
+User podosta 103585
+Reputation: 573
+acceptedVotes: 4
+upvotes: 28
+downvotes: 0
+
+User burrows111 634132
+Reputation: 472
+acceptedVotes: 13
+upvotes: 41
+downvotes: 7
+
+User agou 1578405
+Reputation: 398
+acceptedVotes: 6
+upvotes: 13
+downvotes: 1
+
+User Warren Whipple 1761904
+Reputation: 343
+acceptedVotes: 1
+upvotes: 16
+downvotes: 0
+
+User ahmedsaber111 1009004
+Reputation: 300
+acceptedVotes: 4
+upvotes: 1
+downvotes: 0
+
+User Alex 594800
+Reputation: 218
+acceptedVotes: 0
+upvotes: 16
+downvotes: 0
+
+User Stefan 960205
+Reputation: 181
+acceptedVotes: 2
+upvotes: 15
+downvotes: 0
+
+User garconcn 214858
+Reputation: 160
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User Santiago Regojo 2383403
+Reputation: 141
+acceptedVotes: 4
+upvotes: 8
+downvotes: 0
+
+User user431949 431949
+Reputation: 127
+acceptedVotes: 1
+upvotes: 8
+downvotes: 1
+
+User TheCleaner 135026
+Reputation: 115
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User Khalid Saifullah 1311941
+Reputation: 104
+acceptedVotes: 1
+upvotes: 1
+downvotes: 0
+
+User AGhosT 222741
+Reputation: 98
+acceptedVotes: 2
+upvotes: 3
+downvotes: 0
+
+User borazslo 2379355
+Reputation: 88
+acceptedVotes: 2
+upvotes: 5
+downvotes: 0
+
+User Scott Davey 512978
+Reputation: 81
+acceptedVotes: 0
+upvotes: 8
+downvotes: 0
+
+User brhlavinka 1824313
+Reputation: 73
+acceptedVotes: 1
+upvotes: 4
+downvotes: 0
+
+User peaceLion 2466369
+Reputation: 67
+acceptedVotes: 0
+upvotes: 1
+downvotes: 0
+
+User dannio 3221705
+Reputation: 61
+acceptedVotes: 2
+upvotes: 2
+downvotes: 0
+
+User DewSql 1995814
+Reputation: 57
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User jamis 939971
+Reputation: 53
+acceptedVotes: 0
+upvotes: 4
+downvotes: 0
+
+User caesar 1378074
+Reputation: 50
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User Tinus Heystek 1356213
+Reputation: 46
+acceptedVotes: 1
+upvotes: 3
+downvotes: 0
+
+User Narasimha Nallamsetty 3156622
+Reputation: 42
+acceptedVotes: 0
+upvotes: 4
+downvotes: 1
+
+User Baldwin 476706
+Reputation: 41
+acceptedVotes: 2
+upvotes: 1
+downvotes: 0
+
+User Praveen 101464
+Reputation: 38
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User Rj71439 637837
+Reputation: 36
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User Ivo Pisařovic 1073393
+Reputation: 33
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User Felipe Gomes 1769294
+Reputation: 31
+acceptedVotes: 0
+upvotes: 3
+downvotes: 0
+
+User praveen 223219
+Reputation: 31
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User horez 1728459
+Reputation: 28
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User cdsimpkins 2612017
+Reputation: 26
+acceptedVotes: 1
+upvotes: 1
+downvotes: 0
+
+User Alex 507392
+Reputation: 26
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User Johnny 3319002
+Reputation: 23
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+User Dan 1580110
+Reputation: 22
+acceptedVotes: 0
+upvotes: 0
+downvotes: 0
+
+
+Process finished with exit code 130

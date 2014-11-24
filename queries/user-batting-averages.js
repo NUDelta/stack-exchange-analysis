@@ -19,7 +19,7 @@ var calcStats = function (userCount) {
   userStream.on("data", function (user) {
     counter++;
 
-    if (counter == 0 || counter % statInterval == 0) {
+    if (counter == 1 || counter % statInterval == 0) {
       var questionsAnswered = 0;  //todo WIP
       var acceptedVotes = 0;
       var upvotes = 0;
