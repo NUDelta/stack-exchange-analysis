@@ -1,0 +1,190 @@
+Model - Storing and retrieving
+View - formatting and displaying
+Controller - respond to interaction, update model, provide data for view
+
+Utils (angular.)
+	.isString()
+	.lowercase()
+	.uppercase()
+	.isNumber()
+	.extend(newPart, original)
+	.isObject()
+	.forEach(arrOrObj, function(value, key){})
+	.fromJson(string)
+	.toJson(obj)
+
+Promise/deferred
+	var promise = $http.get("todo.json")
+	promise.success(function(data){log(data)})
+	promise.then(successFn, errFn).then(finalFunction)
+	promise.error()
+
+Architecture
+    modules - high level apps
+        angular.module("nameApp", [dependencies], cfg)  //create module
+        angular.module("nameApp")  //locates module
+        ng-app=myApp in HTML
+        fluent API - returns instance of self for chaining
+
+        Can be used for functional organization as well
+            angular.module("exampleApp.Services")
+            angular.module("exampleApp.Controllers")
+            angular.module("exampleApp.Filters")
+
+        attrs
+            animation
+            config
+
+        lifecycle
+            script include
+            module loaded, .config method invoked
+            module available as a dependency
+            all other modules loaded
+            dependencies resolved
+            .run method invoked
+
+            -- dependency config and run callbacks are fired before source that required dependencies
+
+    directives - extends HTML vocab
+        1 way binding
+            span(ng-bind="todos.length")  //binds inner text only
+            span {{todos.length}}
+            span(ng-bind-template="First: {{todos[0].action}} Second: {{todos[1].action}}")
+            span(ng-non-bindable) Some curly braces are {{}}{{}{}{{}{}
+
+            ng-repeat = "item in todos | filter: {complete: 'false'}"
+                {{ item.action}}
+                //don't combine with other ng's, user filter instead
+
+            ng-repeat = "(key, val) in todos"
+                {{key = val}}
+
+                Provided variables within other directives
+                    $index - iter position
+                    $first, $last, $even, $odd - eval true for those positions
+                    $middle - neither first nor last
+                        ng-class="$odd ? 'odd' : 'even'"
+                        ng-if="$first || $last"
+
+            ng-repeat-start="item in itemList"
+                The first item is number {{$index}}
+
+            ng-repeat-end="item in itemList"
+                The lasst item is number {{$index}}
+
+            ng-switch="", on="data.color"
+                ng-switch-when="green"
+                ng-switch-when="blue"
+                ng-switch-default
+                    no match
+
+            body(ng-cloak)
+                hides the flicker of {{elements}}
+                alternative: don't use {{}} statements
+
+            ng-include(src="'table.html'", onload="js()", autoscroll="true (if you want to scroll to here)")
+                src="viewFile()"
+                    //in the controller
+                    $scope.viewFile = function(){
+                        return "view.html";
+                    }
+
+        2 way bindings
+            Only apply to input, textarea, select
+            ng-model
+                Sets content and updates content
+                input.form-control(name="firstItem", ng-model="item[0].action")
+
+        Conditional
+
+            ng-show="item.complete" //style remains in DOM
+            ng-hide
+            ng-if="item.complete" //like show except not in DOM
+            ng-class="item.myCSSClass"
+            ng-style"{'background-color': item.myColor}"
+            ng-class-odd="item.myOddClass"
+            ng-class-even="item.myEvenClass"
+
+        Events
+            ng-blur
+            ng-change
+            ng-click
+            ng-copy
+            ng-cut
+            ng-paste
+            ng-dblclick
+            ng-focus
+            ng-keydown, keyup, keypress, mousedown/enter/leave/move/up
+            ng-submit
+
+            $scope.myEventHandler = function(e)... do stuff.
+            ng-click="item.value = 'blue"
+
+        Booleans
+            ng-checked
+            ng-disabled
+            ng-open
+            ng-readonly
+            ng-selected
+
+
+        Custom directive
+            // <p ng-controller="dayCtrl" highlight="Monday"/>
+            myApp.directive("highlight", function($filter) {           //factory method Fn, can call services
+                return function (scope, element, attrs) {       //worker Fn, elem is jqLite or jquery elem
+                    var dayNameFilter = $filter("dayName");
+
+                    //scope from controller, attrs from HTML
+                    if(dayNameFilter(scope.day) == attrs.highlight) {
+                        element.css("color", "red");
+                    }
+                }
+            }
+
+            //event directive
+            // tap="message = 'Tapped!'"
+            myApp.directive("tap", function(){
+                return function (scope, elem, attrs) {
+                    elem.on("touchstart touchend", function(){
+                        //apply eval's the js expression in the ng context
+                        scope.$apply(attrs["tap"])
+                    }
+                }
+            }
+
+
+    factory/service/provider - creates service
+        myApp.service("days", function(){
+            this.today = new Date().getDay();
+            this.tomorrow = this.today + 1;
+        });
+
+        myApp.controller("somethingCtrl", function($scope, days) {
+            $scope.day = days.tomorrow
+        }
+
+
+    filter - formats, transforms data
+        // <p>day is {{today || "no day" | dayName}}</p>
+        // applied after JS expressions
+        myApp.filter("dayName", function(){  //factory Fn
+            var dayNumToDayName = ["mon","tues","wed"];
+
+            return function (dayNum) {     //woker Fn
+                return dayNumToDayName[dayNum];
+            };
+        }
+
+    run(callback) - executes when dom ready
+
+    value - creates service that returns value
+        recommended instead of closuring in variables to services for testability
+
+    controller
+        myApp.controller("nameCtrl", factoryFn($scope))
+            Dependency injection resolves the arguments of the factoryFn and injects them into the context
+                Also known as named params
+        $scope - facade for data and functionality passed to views
+        	$ - built in services, features for controllers
+
+        behavior - methods on scope object that can be invoked from the DOM

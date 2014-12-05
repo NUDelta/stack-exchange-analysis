@@ -1,0 +1,58 @@
+doctype html
+head
+  title Cafe
+  script(src='/javascripts/lib/angular/angular.min.js')
+  script(src='/javascripts/app.js')
+  script(src='/javascripts/lib/underscore-min.js')
+  script(src='//localhost:35729/livereload.js')
+  link(href='/javascripts/lib/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+  link(href='/javascripts/lib/bootstrap/dist/css/bootstrap-theme.min.css', rel='stylesheet')
+  link(href='/stylesheets/style.css', rel='stylesheet')
+html(ng-app="todoApp")
+  body(ng-controller="ToDoCtrl")
+    .col-xs-12
+      h2 Stack Harmony#{' '}
+        span.label.label-default(ng-show="viewLearner") {{todo.items.length + (todo.has_more ? '+' : '')}}
+    .learner(ng-show="viewLearner")
+      .col-xs-12
+        h4 Select some questions that you would enjoy answering.
+      .col-xs-8
+        .input-group
+          input.form-control(ng-model="tagText")
+          span.input-group-btn
+            button.btn.btn-default(ng-click="addTag(tagText); tagText = ''") Add Search Tag
+        table.table.table-striped
+          thead
+            tr
+              th Description
+              th Like
+          tbody()
+            tr(ng-repeat="item in todo.items")
+              td
+                a(href="{{item.link}}", ng-bind-html="item.title | trustHTMLFilter") {{item.title}}
+              td
+                input(type="checkbox", ng-model="item.checked")
+      .col-xs-4(ng-show="tagArr.length > 0")
+        p
+          strong Search Tags
+        ul
+          li(ng-repeat="tag in tagArr")
+            p {{tag + ' '}}
+              a(href="", ng-click="removeTag(tag)") X
+      .col-xs-4(ng-show="(todo.items | checkedTagsFilter).length > 0")
+        p Tags From Questions You've Selected
+        ul
+          li(ng-repeat="item in todo.items | checkedTagsFilter")
+            p(ng-class="($index < 3) ? 'highlight' : ''") {{item.split("|")[0] + ' (' + item.split("|")[1] + ')'}}
+        button.btn.btn-default(ng-click="changeViewFinder()") Give me questions
+    .finder.col-xs-12(ng-show="viewFinder")
+      button.btn.btn-default(ng-click="changeViewLearner()") Go back
+      hr
+      table.table.table-striped
+        thead
+          tr
+            th Question
+        tbody()
+          tr(ng-repeat="item in todo.openQuestions | filter:{accepted_answer_id:'!'}")
+            td
+              a(href="{{item.link}}", ng-bind-html="item.title | trustHTMLFilter") {{item.title}}
