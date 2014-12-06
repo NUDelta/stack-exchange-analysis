@@ -97,7 +97,53 @@ Post.find({posttypeid: 1}).sort({score: -1}).limit(1000).exec(function (err, pos
   });
 });
 
-
 //Point distribution over the population (who has the most points)
-//  y is number of users
-//  x are point buckets
+// x is percent from 1 to 100%
+// y is total points for that percent
+User.count({}, function (err, userCount) {
+
+  var stream = User.find().sort({reputation: 1}).stream();
+
+  var interval = Math.ceil(userCount / 100);
+  var percentPoints = {};
+  var percent = 1;
+  var i = 0;
+
+  stream.on('data', function (user) {
+    i++;
+
+    if (percentPoints[percent] === undefined) {
+      percentPoints[percent] = 0;
+    } else {
+      if (user.reputation) {
+        percentPoints[percent] += user.reputation;
+      }
+    }
+
+    if (i == interval) {
+      percent++;
+      i = 0;
+    }
+  });
+
+  stream.on('end', function () {
+    var plotly = require('plotly')('y3sh', 'w9w6r6shwo');
+    var data = [
+      {
+        x: _(percentPoints).keys(),
+        y: _(percentPoints).values(),
+        type: "bar"
+      }
+    ];
+    var graph_options = {filename: config.dbName + "-point-distribution-over-population", fileopt: "overwrite"}
+    plotly.plot(data, graph_options, function (err, msg) {
+      console.log(msg);
+    });
+
+    var totalPoints = _.reduce(_(percentPoints).values(), function (memo, num) {
+      return memo + num;
+    }, 0);
+    console.log(JSON.stringify(percentPoints, null, 2));
+    console.log("Total points: " + totalPoints)
+  });
+});
