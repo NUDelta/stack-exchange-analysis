@@ -5,15 +5,49 @@ var User = require('./../models/UserModel');
 var config = require('./../util/config');
 var _ = require("underscore");
 
+var barStats;
+barStats = function (arr, buckets) {
+  var max = _.max(arr, function (val) {
+    return val;
+  });
+
+  var min = _.min(arr, function (val) {
+    return val;
+  });
+
+  var interval = Math.ceil((max - min) / buckets);
+  var xY = {};
+  for (var x = 1; x <= buckets; x++) {
+    xY[x] = 0;
+  }
+
+  _(arr).each(function (val) {
+    if (val) {
+      xY[Math.ceil(val / interval)] += 1;
+    }
+  });
+
+  return {xY: xY, interval: interval, buckets: buckets};
+};
+
 //For the Top Underdogs questions, what is the distribution of the authors' reputations
 Underdog.find().exec(function (err, underdogs) {
   var ownerIds = _(_(underdogs).pluck("ownerUserId")).without(undefined);
 
   User.find({id: {$in: ownerIds}}).exec(function (err, users) {
     var reputations = _(users).pluck("reputation");
+    reputations = _(reputations).without(null);
 
-    console.log("Underdog Author Reputations:");
-    console.log(JSON.stringify(reputations, null, 2));
+    var data = [
+      {
+        x: reputations,
+        type: "histogram"
+      }
+    ];
+    var graph_options = {filename: "-underdog-provider-reputation-histogram", fileopt: "overwrite"}
+    plotly.plot(data, graph_options, function (err, msg) {
+      console.log(msg);
+    });
   });
 });
 
@@ -24,10 +58,20 @@ Post.find({posttypeid: 1}).sort({score: -1}).limit(1000).exec(function (err, pos
   User.find({id: {$in: ownerIds}}).exec(function (err, users) {
     var reputations = _(users).pluck("reputation");
 
-    console.log("For the Top Questions, what is the reputation of users that asked them:");
-    console.log(JSON.stringify(reputations, null, 2));
+    var data = [
+      {
+        x: reputations,
+        type: "histogram"
+      }
+    ];
+    var graph_options = {filename: "-top-questions-author-reputation-histogram", fileopt: "overwrite"}
+    plotly.plot(data, graph_options, function (err, msg) {
+      console.log(msg);
+    });
   });
 });
+
+/*
 
 //For the Top Answers, what is the reputation of users that provided them
 Post.find({posttypeid: 2}).sort({score: -1}).limit(1000).exec(function (err, posts) {
@@ -136,9 +180,9 @@ User.count({}, function (err, userCount) {
       }
     ];
     var graph_options = {filename: config.dbName + "-point-distribution-over-population", fileopt: "overwrite"}
-    plotly.plot(data, graph_options, function (err, msg) {
-      console.log(msg);
-    });
+    //plotly.plot(data, graph_options, function (err, msg) {
+    //  console.log(msg);
+    //});
 
     var totalPoints = _.reduce(_(percentPoints).values(), function (memo, num) {
       return memo + num;
@@ -147,3 +191,5 @@ User.count({}, function (err, userCount) {
     console.log("Total points: " + totalPoints)
   });
 });
+
+  */
