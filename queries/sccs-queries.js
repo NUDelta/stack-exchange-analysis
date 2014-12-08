@@ -4,31 +4,7 @@ var Post = require('./../models/PostModel');
 var User = require('./../models/UserModel');
 var config = require('./../util/config');
 var _ = require("underscore");
-
-var barStats;
-barStats = function (arr, buckets) {
-  var max = _.max(arr, function (val) {
-    return val;
-  });
-
-  var min = _.min(arr, function (val) {
-    return val;
-  });
-
-  var interval = Math.ceil((max - min) / buckets);
-  var xY = {};
-  for (var x = 1; x <= buckets; x++) {
-    xY[x] = 0;
-  }
-
-  _(arr).each(function (val) {
-    if (val) {
-      xY[Math.ceil(val / interval)] += 1;
-    }
-  });
-
-  return {xY: xY, interval: interval, buckets: buckets};
-};
+var plotly = require('plotly')('y3sh', 'w9w6r6shwo');
 
 //For the Top Underdogs questions, what is the distribution of the authors' reputations
 Underdog.find().exec(function (err, underdogs) {
@@ -44,15 +20,38 @@ Underdog.find().exec(function (err, underdogs) {
         type: "histogram"
       }
     ];
-    var graph_options = {filename: "-underdog-provider-reputation-histogram", fileopt: "overwrite"}
+    var graph_options = {filename: config.dbName + "-underdog-provider-reputation-histogram", fileopt: "overwrite"}
     plotly.plot(data, graph_options, function (err, msg) {
       console.log(msg);
     });
   });
 });
 
+
 //For the Top Questions, what is the reputation of users that asked them
 Post.find({posttypeid: 1}).sort({score: -1}).limit(1000).exec(function (err, posts) {
+  var ownerIds = _(_(posts).pluck("owneruserid")).without(undefined);
+
+  User.find({id: {$in: ownerIds}}).exec(function (err, users) {
+    var reputations = _(users).pluck("reputation");
+    reputations = _(reputations).without(null);
+
+    var data = [
+      {
+        x: reputations,
+        type: "histogram"
+      }
+    ];
+    var graph_options = {filename: config.dbName + "-top-questions-author-reputation-histogram", fileopt: "overwrite"};
+    plotly.plot(data, graph_options, function (err, msg) {
+      console.log(msg);
+    });
+  });
+});
+
+
+//For the Top Answers, what is the reputation of users that provided them
+Post.find({posttypeid: 2}).sort({score: -1}).limit(1000).exec(function (err, posts) {
   var ownerIds = _(_(posts).pluck("owneruserid")).without(undefined);
 
   User.find({id: {$in: ownerIds}}).exec(function (err, users) {
@@ -64,24 +63,10 @@ Post.find({posttypeid: 1}).sort({score: -1}).limit(1000).exec(function (err, pos
         type: "histogram"
       }
     ];
-    var graph_options = {filename: "-top-questions-author-reputation-histogram", fileopt: "overwrite"}
+    var graph_options = {filename: config.dbName + "-top-answers-author-reputation-histogram", fileopt: "overwrite"};
     plotly.plot(data, graph_options, function (err, msg) {
       console.log(msg);
     });
-  });
-});
-
-/*
-
-//For the Top Answers, what is the reputation of users that provided them
-Post.find({posttypeid: 2}).sort({score: -1}).limit(1000).exec(function (err, posts) {
-  var ownerIds = _(_(posts).pluck("owneruserid")).without(undefined);
-
-  User.find({id: {$in: ownerIds}}).exec(function (err, users) {
-    var reputations = _(users).pluck("reputation");
-
-    console.log("For the Top Answers, what is the reputation of users that provided them:");
-    console.log(JSON.stringify(reputations, null, 2));
   });
 });
 
@@ -102,14 +87,20 @@ Underdog.find().populate("parent").sort({score: -1}).limit(1000).exec(function (
     });
   });
 
-  console.log("Top Scoring Underdogs");
-  console.log("\tCount\t\tTag");
-  console.log("\t_____\t\t___");
-
-  _.chain(tagCounts).pairs().sortBy(function (pair) {
+  var tagsToPlot = _.chain(tagCounts).pairs().sortBy(function (pair) {
     return -pair[1];
-  }).first(20).each(function (pair) {
-    console.log("\t" + pair[1] + "\t\t\t" + pair[0]);
+  }).first(20).object().value();
+
+  var data = [
+    {
+      x: _(tagsToPlot).keys(),
+      y: _(tagsToPlot).values(),
+      type: "bar"
+    }
+  ];
+  var graph_options = {filename: config.dbName + "-top-underdog-tags", fileopt: "overwrite"}
+  plotly.plot(data, graph_options, function (err, msg) {
+    console.log(msg);
   });
 });
 
@@ -130,14 +121,20 @@ Post.find({posttypeid: 1}).sort({score: -1}).limit(1000).exec(function (err, pos
 
   });
 
-  console.log("Top Scoring Questions");
-  console.log("\tCount\t\tTag");
-  console.log("\t_____\t\t___");
-
-  _.chain(tagCounts).pairs().sortBy(function (pair) {
+  var tagsToPlot = _.chain(tagCounts).pairs().sortBy(function (pair) {
     return -pair[1];
-  }).first(20).each(function (pair) {
-    console.log("\t" + pair[1] + "\t\t\t" + pair[0]);
+  }).first(20).object().value();
+
+  var data = [
+    {
+      x: _(tagsToPlot).keys(),
+      y: _(tagsToPlot).values(),
+      type: "bar"
+    }
+  ];
+  var graph_options = {filename: config.dbName + "-top-questions-tags", fileopt: "overwrite"}
+  plotly.plot(data, graph_options, function (err, msg) {
+    console.log(msg);
   });
 });
 
@@ -171,7 +168,6 @@ User.count({}, function (err, userCount) {
   });
 
   stream.on('end', function () {
-    var plotly = require('plotly')('y3sh', 'w9w6r6shwo');
     var data = [
       {
         x: _(percentPoints).keys(),
@@ -180,9 +176,9 @@ User.count({}, function (err, userCount) {
       }
     ];
     var graph_options = {filename: config.dbName + "-point-distribution-over-population", fileopt: "overwrite"}
-    //plotly.plot(data, graph_options, function (err, msg) {
-    //  console.log(msg);
-    //});
+    plotly.plot(data, graph_options, function (err, msg) {
+      console.log(msg);
+    });
 
     var totalPoints = _.reduce(_(percentPoints).values(), function (memo, num) {
       return memo + num;
@@ -191,5 +187,3 @@ User.count({}, function (err, userCount) {
     console.log("Total points: " + totalPoints)
   });
 });
-
-  */
