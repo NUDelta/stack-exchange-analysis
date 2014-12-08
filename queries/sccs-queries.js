@@ -112,6 +112,10 @@ Post.find({posttypeid: 1}).sort({score: -1}).limit(1000).exec(function (err, pos
     var tagArr = post.tags.substring(1, post.tags.length - 1).split("><");
 
     _(tagArr).each(function (tag) {
+      if(tag == "c++"){
+        tag = "c-plus-plus"
+      }
+
       if (tagCounts[tag]) {
         tagCounts[tag]++;
       } else {
