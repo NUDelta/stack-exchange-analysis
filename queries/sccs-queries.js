@@ -6,7 +6,7 @@ var config = require('./../util/config');
 var _ = require("underscore");
 var plotly = require('plotly')('y3sh', 'w9w6r6shwo');
 
-//For the Top Underdogs questions, what is the distribution of the authors' reputations
+//For the Underdogs answers, what is the distribution of the authors' reputations
 Underdog.find().exec(function (err, underdogs) {
   var ownerIds = _(_(underdogs).pluck("ownerUserId")).without(undefined);
 
@@ -20,13 +20,12 @@ Underdog.find().exec(function (err, underdogs) {
         type: "histogram"
       }
     ];
-    var graph_options = {filename: config.dbName + "-underdog-provider-reputation-histogram", fileopt: "overwrite"}
+    var graph_options = {filename: "Reputation Distribution of Underdog Answer Authors ", fileopt: "overwrite"}
     plotly.plot(data, graph_options, function (err, msg) {
       console.log(msg);
     });
   });
 });
-
 
 //For the Top Questions, what is the reputation of users that asked them
 Post.find({posttypeid: 1}).sort({score: -1}).limit(1000).exec(function (err, posts) {
@@ -42,13 +41,12 @@ Post.find({posttypeid: 1}).sort({score: -1}).limit(1000).exec(function (err, pos
         type: "histogram"
       }
     ];
-    var graph_options = {filename: config.dbName + "-top-questions-author-reputation-histogram", fileopt: "overwrite"};
+    var graph_options = {filename: "Top Questions vs Author Reputation", fileopt: "overwrite"};
     plotly.plot(data, graph_options, function (err, msg) {
       console.log(msg);
     });
   });
 });
-
 
 //For the Top Answers, what is the reputation of users that provided them
 Post.find({posttypeid: 2}).sort({score: -1}).limit(1000).exec(function (err, posts) {
@@ -63,7 +61,7 @@ Post.find({posttypeid: 2}).sort({score: -1}).limit(1000).exec(function (err, pos
         type: "histogram"
       }
     ];
-    var graph_options = {filename: config.dbName + "-top-answers-author-reputation-histogram", fileopt: "overwrite"};
+    var graph_options = {filename: "Top Answers vs Author Reputation", fileopt: "overwrite"};
     plotly.plot(data, graph_options, function (err, msg) {
       console.log(msg);
     });
@@ -179,7 +177,7 @@ User.count({}, function (err, userCount) {
         type: "bar"
       }
     ];
-    var graph_options = {filename: config.dbName + "-point-distribution-over-population", fileopt: "overwrite"}
+    var graph_options = {filename: "Reputation Wealth Distribution", fileopt: "overwrite"}
     plotly.plot(data, graph_options, function (err, msg) {
       console.log(msg);
     });
