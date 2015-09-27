@@ -15,7 +15,8 @@ var models = [
 db.once('open', function () {
   console.log('Connected to mongo server, tables:');
 
-  mongoose.connection.db.collectionNames(function (error, names) {
+  //mongoose.connection.db.collectionNames(function (error, names) {
+  mongoose.connection.db.listCollections().toArray(function (error, names) {
     names.map(function (cname) {
       console.log("\t" + cname.name);
     });

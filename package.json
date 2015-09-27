@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "moment": "^2.8.3",
-    "mongodb": "^1.4.19",
-    "mongoose": "^3.8.17",
+    "mongodb": "^1.4.35",
+    "mongoose": "^4.0.0",
     "plotly": "^0.2.13",
     "sax": "^0.6.1",
     "underscore": "^1.7.0"
