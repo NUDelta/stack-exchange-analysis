@@ -16,15 +16,21 @@ Post.count({
 });
 
 Post.count({
-  posttypeid: 1
+  posttypeid: 1,
+  acceptedanswerid: {$gt: 0},
+  viewcount: {$gt: 1000}
 }, function (err, postCount) {
-  Underdog.count({}, function (err, uCount) {
-    console.log("Percentage of underdogs in all questions: " + (uCount / postCount) * 100 + "%");
-  });
-});
+  console.log("Total number of questions with accepted answers view over 1000 times:", postCount);
 
-Underdog.find({}).limit(10).exec(function (err, posts) {
-  _(posts).each(function (post) {
-    console.log(JSON.stringify(post, null, 2));
+  var stream = Underdog.find({}).populate("parent").stream();
+
+  var rowCount = 0;
+  stream.on('data', function (post) {
+    if (post.parent.viewcount > 999) {
+      rowCount++;
+    }
+  });
+  stream.on('end', function (post) {
+    console.log("Number of underdogs viewed over 1000 times: ", rowCount)
   });
 });
